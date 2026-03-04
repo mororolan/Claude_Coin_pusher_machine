@@ -3,57 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>推币机游戏</title>
+  <title>3D 推币机</title>
   <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
-  <div id="game-container">
-    <header>
-      <h1>🪙 推币机</h1>
-      <div id="stats">
-        <div class="stat">
-          <span class="label">持有硬币</span>
-          <span id="coins-held" class="value">20</span>
-        </div>
-        <div class="stat">
-          <span class="label">得分</span>
-          <span id="score" class="value">0</span>
-        </div>
-        <div class="stat">
-          <span class="label">最高分</span>
-          <span id="high-score" class="value">0</span>
-        </div>
-      </div>
-    </header>
+  <div id="canvas-container"></div>
 
-    <div id="game-area">
-      <canvas id="game-canvas"></canvas>
-      <div id="drop-zone">
-        <div id="drop-indicator"></div>
-        <div id="drop-hint">点击投币</div>
+  <!-- HUD overlay -->
+  <div id="hud">
+    <div id="stats-bar">
+      <div class="stat">
+        <span class="stat-label">🪙 持有</span>
+        <span class="stat-val" id="ui-coins">30</span>
+      </div>
+      <div class="stat jackpot-stat">
+        <span class="stat-label">🎰 Jackpot</span>
+        <div id="jackpot-bar"><div id="jackpot-fill"></div></div>
+      </div>
+      <div class="stat">
+        <span class="stat-label">⭐ 得分</span>
+        <span class="stat-val" id="ui-score">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">🏆 最高</span>
+        <span class="stat-val" id="ui-hiscore">0</span>
       </div>
     </div>
 
-    <div id="controls">
-      <button id="btn-insert" class="btn btn-primary">
-        🪙 投入硬币
-      </button>
-      <button id="btn-auto" class="btn btn-secondary">
-        自动投币
-      </button>
-      <button id="btn-reset" class="btn btn-danger">
-        重置游戏
-      </button>
-    </div>
+    <div id="drop-guide">← 点击画面投币 →</div>
 
-    <div id="message-overlay" class="hidden">
-      <div id="message-box">
-        <div id="message-icon"></div>
-        <div id="message-text"></div>
-      </div>
+    <div id="controls-bar">
+      <button class="btn btn-gold" id="btn-drop">🪙 投币</button>
+      <button class="btn btn-blue" id="btn-auto">🤖 自动</button>
+      <button class="btn btn-red" id="btn-reset">🔄 重置</button>
     </div>
   </div>
 
-  <script src="game.js"></script>
+  <!-- Drop indicator (follows mouse on canvas) -->
+  <div id="drop-indicator"></div>
+
+  <!-- Floating messages -->
+  <div id="game-message"></div>
+
+  <script type="module" src="game.js"></script>
 </body>
 </html>
